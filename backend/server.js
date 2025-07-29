@@ -4,6 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./config/DB.js";
 import authRoutes from "./routes/authRoutes.js";
+import tripRoutes from "./routes/tripRoutes.js";  
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // all Routes 
-app.use('/api',authRoutes); 
+app.use('/api',authRoutes);
+app.use('/api/trips', tripRoutes); 
 
 
 app.get("/", (req, res) => {
