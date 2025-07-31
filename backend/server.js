@@ -4,7 +4,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./config/DB.js";
 import authRoutes from "./routes/authRoutes.js";
-import tripRoutes from "./routes/tripRoutes.js";  
+import tripRoutes from "./routes/tripRoutes.js"; 
+
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 
 // all Routes 

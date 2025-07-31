@@ -1,11 +1,14 @@
 import express from "express";
-import {createTrip} from "../controllers/tripController.js";
+import {createTrip, getTrip, deleteTrip} from "../controllers/tripController.js";
+import authMiddleware from '../middleware/authMiddleware.js'; 
 
 const router = express.Router();
 
-router.post('/create-trip', createTrip);
-router.post('/get-trip', getTrip);
-router.delete('/delete-trip/:id', deleteTrip);
+router.use(authMiddleware);
+
+router.post('/create-trip',authMiddleware, createTrip);
+router.get('/get-trip',authMiddleware, getTrip);
+router.delete('/delete-trip/:id',authMiddleware, deleteTrip);
 
 
 export default router;

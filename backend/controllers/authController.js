@@ -1,6 +1,7 @@
 import User from '../models/users.js';
 import bcrypt from 'bcryptjs';
 import generateToken from '../utils/generateToken.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
 
 // # Signup route
@@ -31,11 +32,11 @@ const signupRoute = async (req, res) => {
         });
 
         await newUser.save();
-        const token = generateToken(newUser._id);
+        const token = generateToken(newUser.id);
 
         res.status(201).json({
             message: 'User created successfully',
-            _id: newUser._id,
+            id: newUser.id,
             username: newUser.username,
             token
         });
@@ -45,7 +46,7 @@ const signupRoute = async (req, res) => {
     }
 }
 
-const loginRoute = async(req, res) => {
+const loginRoute =  async(req, res) => {
     try {
         const {username, password} = req.body;
 
@@ -65,11 +66,11 @@ const loginRoute = async(req, res) => {
             return res.status(400).json({error: 'Invalid credentials'});
         }
 
-        const token = generateToken(userExist._id);
+        const token = generateToken(userExist.id);
         
         res.status(200).json({
             message: "Login successful", 
-            _id: userExist._id,
+            id: userExist.id,
             username: userExist.username,
             token
         });
